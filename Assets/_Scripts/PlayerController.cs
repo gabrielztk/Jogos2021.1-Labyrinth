@@ -4,13 +4,16 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-// Referências para a imagem do player: https://www.gratispng.com/png-xlgs6i/
 public class PlayerController : MonoBehaviour
 {
     [Range(1, 10)]
     public float velocity;
 
-
+    GameManager gm;
+    void Start()
+    {
+        gm = GameManager.GetInstance();
+    }
 
     void Update()
     {
@@ -19,5 +22,6 @@ public class PlayerController : MonoBehaviour
 
         transform.position +=new Vector3(inputX, inputY, 0) * Time.deltaTime * velocity;
     }
+
 
 }

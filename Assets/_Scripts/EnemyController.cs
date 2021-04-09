@@ -14,13 +14,14 @@ public class EnemyController : MonoBehaviour
 	private bool isWaiting     = false;
 	private float speedStorage = 0;
 
-	
+    GameManager gm;
 
 	/**
 	 * Initialisation
 	 * 
 	 */
 	void Start () {
+        gm = GameManager.GetInstance();
 		if(wayPoints.Length > 0) {
 			currentWaypoint = wayPoints[0];
 		}
@@ -49,8 +50,6 @@ public class EnemyController : MonoBehaviour
 	{
 		isWaiting = !isWaiting;
 	}
-
-
 	
 	/**
 	 * Move the object towards the selected waypoint
@@ -63,9 +62,6 @@ public class EnemyController : MonoBehaviour
 		
 		// Get the target waypoints position
 		Vector3 targetPosition = currentWaypoint.transform.position;
-
-        Debug.Log(currentPosition);
-        Debug.Log(targetPosition);
 		
 		// If the moving object isn't that close to the waypoint
 		if(Vector3.Distance(currentPosition, targetPosition) > .1f) {
@@ -130,4 +126,13 @@ public class EnemyController : MonoBehaviour
 
 		currentWaypoint = wayPoints[currentIndex];
 	}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            PlayerPrefs.SetInt("SavedHighScore", gm.points);
+            Destroy(collision.gameObject);
+        }
+    }
 }
