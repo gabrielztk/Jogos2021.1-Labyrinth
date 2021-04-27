@@ -135,10 +135,11 @@ public class EnemyController : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
 			scene_name = SceneManager.GetActiveScene().name;
-			SceneManager.LoadScene(scene_name);
 
             PlayerPrefs.SetInt("SavedHighScore", gm.points);
             Destroy(collision.gameObject);
+
+			SceneManager.LoadScene("MainMenu");
         }
     }
 }
