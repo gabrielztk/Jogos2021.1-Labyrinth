@@ -25,7 +25,7 @@ public class FlagController : MonoBehaviour
                 }
                 if (scene_name == "Canyon")
                 {
-                    SceneManager.LoadScene("Forest");
+                    SceneManager.LoadScene("MainMenu");
                 }
                 
             }
