@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class EnemyController : MonoBehaviour
 {
@@ -13,8 +14,10 @@ public class EnemyController : MonoBehaviour
 	private int currentIndex   = 0;
 	private bool isWaiting     = false;
 	private float speedStorage = 0;
+	
 
     GameManager gm;
+	string scene_name;
 
 	/**
 	 * Initialisation
@@ -131,6 +134,9 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+			scene_name = SceneManager.GetActiveScene().name;
+			SceneManager.LoadScene(scene_name);
+
             PlayerPrefs.SetInt("SavedHighScore", gm.points);
             Destroy(collision.gameObject);
         }
